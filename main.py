@@ -2,6 +2,7 @@
 
 import sys
 from functions import * 
+from bfs import bfs
 
 strategy = sys.argv[1]
 param = sys.argv[2]
@@ -18,30 +19,4 @@ print(statsFile)
 
 puzzle = readPuzzleFile(puzzleFile)
 
-l = move(puzzle,'L')
-r = move(puzzle,'R')
-u = move(puzzle,'U')
-d = move(puzzle,'D')
-a = move(puzzle,'A')
-
-print("{}x{}".format(len(puzzle),len(puzzle[0])))
-printPuzzle(puzzle)
-print()
-
-print("L")
-printPuzzle(l)
-print()
-print("R")
-printPuzzle(r)
-print()
-print("U")
-printPuzzle(u)
-print()
-print("D")
-printPuzzle(d)
-print()
-print("A")
-printPuzzle(a)
-print()
-
-print(validate(puzzle))
+print(bfs(puzzle,"LRUD"))

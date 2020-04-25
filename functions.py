@@ -23,7 +23,6 @@ def find0(puzzle):
     return -1
 
 def move(puzzle, direction):
-
     result = []
     for column in puzzle:
         result.append(column.copy())
@@ -54,7 +53,7 @@ def move(puzzle, direction):
         if y0 == yLast:
             return "Operation imposable."
         else:
-            for i in range(x0,yLast):
+            for i in range(y0,yLast):
                 result[x0][i] = result[x0][i+1]
             result[x0][yLast] = 0
             return result
