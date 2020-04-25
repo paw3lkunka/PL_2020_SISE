@@ -1,33 +1,39 @@
 def readPuzzleFile(filename):
-    puzzle = [[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]]
 
+    puzzle = []
     f = open(filename)
+    
+    size = f.readline()
+    rows = int(size[0])
+    columns = int(size[2])
 
-    size = f.readline().rstrip()
-
-    for i in range(4):
+    for i in range(rows):
         line = f.readline().split()
-        for j in range(4):
-            puzzle[i][j] = int(line[j])
+        puzzle.append([])
+        for j in range(columns):
+            puzzle[i].append(int(line[j]))
 
-    return size, puzzle
+    return puzzle
 
 def find0(puzzle):
-    for i in range(4):
-        for j in range(4):
+    for i in range(len(puzzle)):
+        for j in range(len(puzzle[0])):
             if puzzle[i][j] == 0:
                 return i, j
     return -1
 
 def move(puzzle, direction):
+
     result = []
     for column in puzzle:
         result.append(column.copy())
 
     x0, y0 = find0(result)
+    xLast = len(puzzle) - 1
+    yLast = len(puzzle[0]) - 1
 
     if direction == 'D':
-        if x0 == 3:
+        if x0 == xLast:
             return "Operation imposable."
         else:
             for i in reversed(range(0,x0)):
@@ -39,25 +45,25 @@ def move(puzzle, direction):
         if x0 == 0:
             return "Operation imposable."
         else:
-            for i in range(x0,3):
+            for i in range(x0,xLast):
                 result[i][y0] = result[i+1][y0]
-            result[3][y0] = 0
+            result[xLast][y0] = 0
             return result
 
     elif direction == 'L':
-        if y0 == 0:
+        if y0 == yLast:
             return "Operation imposable."
         else:
-            for i in range(x0,3):
+            for i in range(x0,yLast):
                 result[x0][i] = result[x0][i+1]
-            result[x0][3] = 0
+            result[x0][yLast] = 0
             return result
 
     elif direction == 'R':
-        if y0 == 3:
+        if y0 == 0:
             return "Operation imposable."
         else:
-            for i in reversed(range(0,x0)):
+            for i in reversed(range(0,y0)):
                 result[x0][i+1] = result[x0][i]
             result[x0][0] = 0
             return result
@@ -66,19 +72,11 @@ def move(puzzle, direction):
 
 def printPuzzle(puzzle):
 
-    def cell(x,y):
-        return str(puzzle[x][y]).zfill(2)
-
     if not isinstance(puzzle,list) and not isinstance(puzzle[0],list):
         print(puzzle)
 
     else:
-        print("╔══╤══╤══╤══╗")
-        print("║{}│{}│{}│{}║".format(cell(0,0),cell(0,1),cell(0,2),cell(0,3)))
-        print("╟──┼──┼──┼──╢")
-        print("║{}│{}│{}│{}║".format(cell(1,0),cell(1,1),cell(1,2),cell(1,3)))
-        print("╟──┼──┼──┼──╢")
-        print("║{}│{}│{}│{}║".format(cell(2,0),cell(2,1),cell(2,2),cell(2,3)))
-        print("╟──┼──┼──┼──╢")
-        print("║{}│{}│{}│{}║".format(cell(3,0),cell(3,1),cell(3,2),cell(3,3)))
-        print("╚══╧══╧══╧══╝")
+        for row in puzzle:
+            for cell in row:
+                print(str(cell).zfill(2) + "  ", end='')
+            print()
