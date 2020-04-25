@@ -43,3 +43,5 @@ print()
 print("A")
 printPuzzle(a)
 print()
+
+print(validate(puzzle))

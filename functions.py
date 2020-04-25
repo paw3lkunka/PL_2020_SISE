@@ -80,3 +80,12 @@ def printPuzzle(puzzle):
             for cell in row:
                 print(str(cell).zfill(2) + "  ", end='')
             print()
+
+def validate(puzzle):
+    rows = len(puzzle)
+    columns = len(puzzle[0])
+    for i in range(rows):
+        for j in range(columns):
+            if puzzle[i][j] != ( 0 if i == rows-1 and j == columns-1 else i * columns + j + 1):
+                return False
+    return True
