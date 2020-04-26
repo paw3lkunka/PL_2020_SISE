@@ -19,7 +19,6 @@ def saveSolution(filename, solution, depth):
     f = open(filename, mode='wt')
     length = solutionLength(solution)
     if length != -1:
-        print(length)
         f.write(str(length)+"\n")
         f.write(solution)
     else:        
@@ -39,13 +38,10 @@ def saveExtra(filename, solution, visitedStates, proceededStates, maxRecursionDe
     f.close()
 
 def solutionLength(solution):    
-    if solution == "Puzzle unsolved.":
-        length = -1
-        
-    else:
-        length = len(solution)
-
-    return length
+    for char in solution:
+        if char not in "LRUD":
+            return -1
+    return len(solution)
 
 def find0(puzzle):
     for i in range(len(puzzle)):

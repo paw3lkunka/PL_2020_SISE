@@ -20,7 +20,7 @@ def bfs(puzzle,order):
         if newStatesCount > 0:
             for i in range(newStatesCount):
                 parsedStates += 1
-                if isinstance(currentStates[i],list):    
+                if isinstance(currentStates[i],list):
                     if currentStates[i] not in oldStates:
                         oldStates.append(currentStates[i])
                         if validate(currentStates[i]):
@@ -28,8 +28,8 @@ def bfs(puzzle,order):
                         else:
                             for operator in order:
                                 createdStates += 0
-                                newStates.append(move(currentStates[i],operator))
-                                newInstructions.append(currentInstructions[i]+operator)
+                                newStates.append(move(currentStates[i], operator))
+                                newInstructions.append(currentInstructions[i] + operator)
         else:
             return "Puzzle unsolved.", createdStates, parsedStates, depth
         currentStates = newStates
