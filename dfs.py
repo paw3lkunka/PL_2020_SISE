@@ -6,6 +6,7 @@ def dfs(puzzle, order):
 
     createdStates = 1
     parsedStates = 0
+    depth = 0
     oldStates = []
 
     currentStates = [puzzle]
@@ -13,18 +14,19 @@ def dfs(puzzle, order):
     
     while True:
         if currentStates:
-            parsedStates += 1
             nextState = currentStates.pop()
             nextInstructions = currentInstructions.pop()
             if isinstance(nextState, list):
-                if nextState not in oldStates:
+                parsedStates += 1
+                depth = len(nextInstructions)
+                if depth < 10 and nextState not in oldStates:
                     oldStates.append(nextState)
-                    if validate(nextState)
-                        return nextInstructions, createdStates, parsedStates, len(nextInstructions), (time.perf_counter() - start) * 1000 
+                    if validate(nextState):
+                        return nextInstructions, createdStates, parsedStates, depth, (time.perf_counter() - start) * 1000 
                     else:
                         for operator in reversed(order):
                             createdStates += 0
                             currentStates.append(move(nextState, operator))
                             currentInstructions.append(nextInstructions + operator)
         else:
-            return "Puzzle unsolved.", createdStates, parsedStates, depth
+            return "Puzzle unsolved.", createdStates, parsedStates, depth, (time.perf_counter() - start) * 1000 
