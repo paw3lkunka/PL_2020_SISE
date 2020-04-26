@@ -1,8 +1,10 @@
 #!python
 
 import sys
-from functions import * 
+from functions import readPuzzleFile, saveSolution, saveExtra
 from bfs import bfs
+from dfs import dfs
+from astr import astr
 
 strategy = sys.argv[1]
 param = sys.argv[2]
@@ -14,12 +16,10 @@ if strategy == "bfs":
     function = bfs
 
 elif strategy == "dfs":
-    print("depth-first search not implemented")
-    #function = dfs
+    function = dfs
 
 elif strategy == "astr":
-    print("A* not implemented")
-    #function = astr
+    function = astr
 
 else:
     print("Unknown strategy")
