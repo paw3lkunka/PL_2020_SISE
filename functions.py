@@ -59,30 +59,30 @@ def move(puzzle, direction):
     xLast = len(puzzle) - 1
     yLast = len(puzzle[0]) - 1
 
-    if direction == 'D':
+    if direction == 'U':
         if row0 == 0:
-            return "Operation imposable."
+            return "Operation impossible."
         else:
             result[row0][col0], result[row0-1][col0] = result[row0-1][col0], result[row0][col0] 
             return result
 
-    elif direction == 'U':
+    elif direction == 'D':
         if row0 == xLast:
-            return "Operation imposable."
+            return "Operation impossible."
         else:
             result[row0][col0], result[row0+1][col0] = result[row0+1][col0], result[row0][col0] 
             return result
 
-    elif direction == 'L':
+    elif direction == 'R':
         if col0 == yLast:
-            return "Operation imposable."
+            return "Operation impossible."
         else:
             result[row0][col0], result[row0][col0+1] = result[row0][col0+1], result[row0][col0] 
             return result
 
-    elif direction == 'R':
+    elif direction == 'L':
         if col0 == 0:
-            return "Operation imposable."
+            return "Operation impossible."
         else:
             result[row0][col0], result[row0][col0-1] = result[row0][col0-1], result[row0][col0] 
             return result
