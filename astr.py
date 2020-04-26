@@ -1,4 +1,4 @@
-from functions import move, validate
+from functions import move, validate, find
 from functions import printPuzzle
 import time
 
@@ -70,8 +70,13 @@ def hamming(state1, state2):
     return value
 
 def manhattan(state1, state2):
-    print("Manhattan distance not implemented")
-    exit()
+    value = 0
+    for i in range(16):
+        x1, y1 = find(i,state1)
+        x2, y2 = find(i,state2)
+        value += abs(x1 - x2)
+        value += abs(y1 - y2)
+    return value
 
 
 solvedState = [

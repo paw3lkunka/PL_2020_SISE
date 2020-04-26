@@ -43,10 +43,10 @@ def solutionLength(solution):
             return -1
     return len(solution)
 
-def find0(puzzle):
+def find(number, puzzle):
     for i in range(len(puzzle)):
         for j in range(len(puzzle[0])):
-            if puzzle[i][j] == 0:
+            if puzzle[i][j] == number:
                 return i, j
     return -1
 
@@ -55,7 +55,7 @@ def move(puzzle, direction):
     for column in puzzle:
         result.append(column.copy())
 
-    row0, col0 = find0(result)
+    row0, col0 = find(0, result)
     xLast = len(puzzle) - 1
     yLast = len(puzzle[0]) - 1
 
