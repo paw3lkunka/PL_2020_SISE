@@ -1,8 +1,8 @@
 from functions import *
-from datetime import datetime
+import time
 
 def bfs(puzzle,order):
-    time = datetime.now()
+    start = time.perf_counter()
     createdStates = 1
     parsedStates = 0
     depth = 0
@@ -23,7 +23,7 @@ def bfs(puzzle,order):
                     if currentStates[i] not in oldStates:
                         oldStates.append(currentStates[i])
                         if validate(currentStates[i]):
-                            return currentInstructions[i], createdStates, parsedStates, depth#, (datetime.now() - time).microsecond
+                            return currentInstructions[i], createdStates, parsedStates, depth, (time.perf_counter() - start) * 1000
                         else:
                             for operator in order:
                                 createdStates += 0

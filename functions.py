@@ -15,6 +15,23 @@ def readPuzzleFile(filename):
 
     return puzzle
 
+def saveSolution(filename, solution, depth):
+    f = open(filename, mode='wt')
+    f.write(str(depth)+"\n")
+    f.write(solution)
+    f.close()
+
+def saveExtra(filename, solutionLength, visitedStates, proceededStates, maxRecursionDepth, executionTime):
+    f = open(filename, mode='wt')
+    f.write("{}\n{}\n{}\n{}\n{:.2f}".format(
+        solutionLength,
+        visitedStates,
+        proceededStates,
+        maxRecursionDepth,
+        executionTime
+    ))
+    f.close()
+
 def find0(puzzle):
     for i in range(len(puzzle)):
         for j in range(len(puzzle[0])):
