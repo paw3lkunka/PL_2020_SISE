@@ -27,44 +27,36 @@ def move(puzzle, direction):
     for column in puzzle:
         result.append(column.copy())
 
-    x0, y0 = find0(result)
+    row0, col0 = find0(result)
     xLast = len(puzzle) - 1
     yLast = len(puzzle[0]) - 1
 
     if direction == 'D':
-        if x0 == xLast:
+        if row0 == 0:
             return "Operation imposable."
         else:
-            for i in reversed(range(0,x0)):
-                result[i+1][y0] = result[i][y0]
-            result[0][y0] = 0
+            result[row0][col0], result[row0-1][col0] = result[row0-1][col0], result[row0][col0] 
             return result
 
     elif direction == 'U':
-        if x0 == 0:
+        if row0 == xLast:
             return "Operation imposable."
         else:
-            for i in range(x0,xLast):
-                result[i][y0] = result[i+1][y0]
-            result[xLast][y0] = 0
+            result[row0][col0], result[row0+1][col0] = result[row0+1][col0], result[row0][col0] 
             return result
 
     elif direction == 'L':
-        if y0 == yLast:
+        if col0 == yLast:
             return "Operation imposable."
         else:
-            for i in range(y0,yLast):
-                result[x0][i] = result[x0][i+1]
-            result[x0][yLast] = 0
+            result[row0][col0], result[row0][col0+1] = result[row0][col0+1], result[row0][col0] 
             return result
 
     elif direction == 'R':
-        if y0 == 0:
+        if col0 == 0:
             return "Operation imposable."
         else:
-            for i in reversed(range(0,y0)):
-                result[x0][i+1] = result[x0][i]
-            result[x0][0] = 0
+            result[row0][col0], result[row0][col0-1] = result[row0][col0-1], result[row0][col0] 
             return result
     else:
         return "Direction: " + direction + " is invalid."
