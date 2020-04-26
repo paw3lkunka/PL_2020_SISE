@@ -20,16 +20,15 @@ def bfs(puzzle,order):
         if newStatesCount > 0:
             for i in range(newStatesCount):
                 parsedStates += 1
-                if isinstance(currentStates[i],list):
-                    if currentStates[i] not in oldStates:
-                        oldStates.append(currentStates[i])
-                        if validate(currentStates[i]):
-                            return currentInstructions[i], createdStates, parsedStates, depth, (time.perf_counter() - start) * 1000
-                        else:
-                            for operator in order:
-                                createdStates += 0
-                                newStates.append(move(currentStates[i], operator))
-                                newInstructions.append(currentInstructions[i] + operator)
+                if isinstance(currentStates[i],list) and currentStates[i] not in oldStates:
+                    oldStates.append(currentStates[i])
+                    if validate(currentStates[i]):
+                        return currentInstructions[i], createdStates, parsedStates, depth, (time.perf_counter() - start) * 1000
+                    else:
+                        for operator in order:
+                            createdStates += 0
+                            newStates.append(move(currentStates[i], operator))
+                            newInstructions.append(currentInstructions[i] + operator)
         else:
             return "Puzzle unsolved.", createdStates, parsedStates, depth, (time.perf_counter() - start) * 1000
         currentStates = newStates

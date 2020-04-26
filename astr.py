@@ -23,6 +23,7 @@ def astr(puzzle, heuristic):
         return distance(state,solvedState)
             
     start = time.perf_counter()
+    #TODO implement after Nowak's response
     visitedStates = 0
     proceededStates = 0
     maxDepth = 0
@@ -58,11 +59,7 @@ def astr(puzzle, heuristic):
         currentInstructions.pop(bestIndex)
         currentDepths.pop(bestIndex)
 
-
-    print("A* not implemented")
-    exit()
-    #return instruction, visitedStates, proceededStates, depth, time = (time.perf_counter() - start) * 1000
-    return "Puzzle unsolved.", visitedStates, proceededStates, depth, (time.perf_counter() - start) * 1000
+    return "Puzzle unsolved.", "unimplemented", "unimplemented", maxDepth, (time.perf_counter() - start) * 1000
 
 def hamming(state1, state2):
     value = 0
