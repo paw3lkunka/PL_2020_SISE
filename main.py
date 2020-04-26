@@ -26,9 +26,9 @@ else:
     exit()
 
 puzzle = readPuzzleFile(puzzleFile)
-solution, createdStates, parsedStates, depth, time = function(puzzle,param)
+solution, proceededStates, visitedStates, depth, time = function(puzzle,param)
 
-print(solution, createdStates, parsedStates, depth, time)
+print(solution, proceededStates, visitedStates, depth, time)
 
 saveSolution(solutionFile, solution, depth)
-saveExtra(statsFile, len(solution), parsedStates, createdStates, depth, time)
+saveExtra(statsFile, solution, visitedStates, proceededStates, depth, time)

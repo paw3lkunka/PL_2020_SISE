@@ -3,6 +3,7 @@ import time
 
 def bfs(puzzle,order):
     start = time.perf_counter()
+    #TODO implement
     createdStates = 1
     parsedStates = 0
     depth = 0
