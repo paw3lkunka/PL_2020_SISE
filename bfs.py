@@ -1,4 +1,4 @@
-from functions import *
+from functions import move, validate
 import time
 
 def bfs(puzzle,order):
