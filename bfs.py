@@ -31,7 +31,7 @@ def bfs(puzzle,order):
                                 newStates.append(move(currentStates[i], operator))
                                 newInstructions.append(currentInstructions[i] + operator)
         else:
-            return "Puzzle unsolved.", createdStates, parsedStates, depth
+            return "Puzzle unsolved.", createdStates, parsedStates, depth, (time.perf_counter() - start) * 1000
         currentStates = newStates
         currentInstructions = newInstructions
         newStates = []
