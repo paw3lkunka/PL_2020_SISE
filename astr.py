@@ -25,13 +25,14 @@ def astr(puzzle, heuristic):
     start = time.perf_counter()
     visitedStates = 0
     proceededStates = 0
-    depth = 0
+    maxDepth = 0
     
     oldStates = []
 
     currentStates = [puzzle]
     currentInstructions = [""]
     currentDistences = [f(puzzle)]
+    currentDepths = [0]
 
     while True:
         
@@ -41,7 +42,7 @@ def astr(puzzle, heuristic):
                 bestIndex = i
         
         if validate(currentStates[bestIndex]):
-            return currentInstructions[bestIndex], "unimplemented", "unimplemented", "unimplemented", (time.perf_counter() - start) * 1000
+            return currentInstructions[bestIndex], "unimplemented", "unimplemented", maxDepth, (time.perf_counter() - start) * 1000
 
         for operator in "LRUD":
             new = move(currentStates[bestIndex], operator)
@@ -49,10 +50,13 @@ def astr(puzzle, heuristic):
                 currentStates.append(new)
                 currentInstructions.append(currentInstructions[bestIndex] + operator)
                 currentDistences.append(f(new))
+                currentDepths.append(currentDepths[bestIndex]+1)
+                maxDepth = max(maxDepth, currentDepths[-1])
         
         oldStates.append(currentStates.pop(bestIndex))
         currentDistences.pop(bestIndex)
-        currentInstructions.pop(bestIndex)                
+        currentInstructions.pop(bestIndex)
+        currentDepths.pop(bestIndex)
 
 
     print("A* not implemented")
