@@ -1,3 +1,6 @@
 .vscode
 __pycache__
 wikamp
+jupyter_archives
+.ipynb_checkpoints
+Untitled*
