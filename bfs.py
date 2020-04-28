@@ -3,9 +3,8 @@ import time
 
 def bfs(puzzle,order):
     start = time.perf_counter()
-    #TODO implement
-    createdStates = 1
-    parsedStates = 0
+    visitedStates = 0
+    procededStates = 0
     depth = 0
     oldStates = []
 
@@ -19,18 +18,19 @@ def bfs(puzzle,order):
         newStatesCount = len(currentStates)
         if newStatesCount > 0:
             for i in range(newStatesCount):
-                parsedStates += 1
+                procededStates += 1
                 if isinstance(currentStates[i],list) and currentStates[i] not in oldStates:
                     oldStates.append(currentStates[i])
                     if validate(currentStates[i]):
-                        return currentInstructions[i], createdStates, parsedStates, depth, (time.perf_counter() - start) * 1000
+                        return currentInstructions[i], procededStates, visitedStates, depth, (time.perf_counter() - start) * 1000
                     else:
                         for operator in order:
-                            createdStates += 0
+                            visitedStates += 1
                             newStates.append(move(currentStates[i], operator))
                             newInstructions.append(currentInstructions[i] + operator)
         else:
-            return "Puzzle unsolved.", createdStates, parsedStates, depth, (time.perf_counter() - start) * 1000
+            return "Puzzle unsolved.", procededStates, visitedStates, depth, (time.perf_counter() - start) * 1000
+            
         currentStates = newStates
         currentInstructions = newInstructions
         newStates = []
