@@ -23,7 +23,6 @@ def astr(puzzle, heuristic):
         return distance(state,solvedState)
             
     start = time.perf_counter()
-    #TODO implement after Nowak's response
     visitedStates = 0
     proceededStates = 0
     maxDepth = 0
@@ -42,12 +41,14 @@ def astr(puzzle, heuristic):
             if currentDistences[i] < currentDistences[bestIndex]:
                 bestIndex = i
         
+        proceededStates += 1
         if validate(currentStates[bestIndex]):
-            return currentInstructions[bestIndex], "unimplemented", "unimplemented", maxDepth, (time.perf_counter() - start) * 1000
+            return currentInstructions[bestIndex], proceededStates, visitedStates, maxDepth, (time.perf_counter() - start) * 1000
 
         for operator in "LRUD":
             new = move(currentStates[bestIndex], operator)
             if isinstance(new[0], list) and (new not in oldStates):
+                visitedStates += 1
                 currentStates.append(new)
                 currentInstructions.append(currentInstructions[bestIndex] + operator)
                 currentDistences.append(f(new))
@@ -59,7 +60,7 @@ def astr(puzzle, heuristic):
         currentInstructions.pop(bestIndex)
         currentDepths.pop(bestIndex)
 
-    return "Puzzle unsolved.", "unimplemented", "unimplemented", maxDepth, (time.perf_counter() - start) * 1000
+    return "Puzzle unsolved.", proceededStates, visitedStates, maxDepth, (time.perf_counter() - start) * 1000
 
 def hamming(state1, state2):
     value = 0

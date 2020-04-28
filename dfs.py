@@ -1,11 +1,10 @@
-from functions import *
+from functions import move, validate
 import time
 
 def dfs(puzzle, order):
     start = time.perf_counter()
-
-    createdStates = 1
-    parsedStates = 0
+    visitedStates = 0
+    procededStates = 0
     maxDepth = 0
     oldStates = []
 
@@ -21,14 +20,14 @@ def dfs(puzzle, order):
             maxDepth = max(depth, maxDepth)
             if isinstance(nextState, list) and (nextState not in oldStates) and (depth < 16):
                 oldStates.append(nextState)
-                parsedStates += 1
+                procededStates += 1
                 if validate(nextState):
-                    return nextInstructions, createdStates, parsedStates, maxDepth, (time.perf_counter() - start) * 1000 
+                    return nextInstructions, procededStates, visitedStates, maxDepth, (time.perf_counter() - start) * 1000 
                 else:
                     for operator in reversed(order):
-                        createdStates += 0
+                        visitedStates += 1
                         currentStates.append(move(nextState, operator))
                         currentInstructions.append(nextInstructions + operator)
                         currentDepths.append(depth + 1)
         else:
-            return "Puzzle unsolved.", createdStates, parsedStates, maxDepth, (time.perf_counter() - start) * 1000 
+            return "Puzzle unsolved.", procededStates, visitedStates, maxDepth, (time.perf_counter() - start) * 1000 
