@@ -2,6 +2,8 @@ from functions import move,validate
 import time
 
 def dfs(puzzle, order):
+    maxAcceptableDepth = 26
+
     start = time.perf_counter()
     visitedStates = 0
     procededStates = 0
@@ -18,7 +20,7 @@ def dfs(puzzle, order):
             nextInstructions = currentInstructions.pop()
             depth = currentDepths.pop()
             maxDepth = max(depth, maxDepth)
-            if isinstance(nextState, list) and (nextState not in oldStates) and (depth < 16):
+            if isinstance(nextState, list) and (nextState not in oldStates) and (depth <= maxAcceptableDepth):
                 oldStates.append(nextState)
                 procededStates += 1
                 if validate(nextState):
