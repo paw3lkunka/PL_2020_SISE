@@ -2,7 +2,7 @@ from functions import move,validate
 import time
 
 def dfs(puzzle, order):
-    maxAcceptableDepth = 26
+    maxAcceptableDepth = 20
 
     start = time.perf_counter()
     visitedStates = 0
@@ -28,9 +28,10 @@ def dfs(puzzle, order):
                 for operator in reversed(order):
                     visitedStates += 1
                     newState = move(nextState, operator)
-                    if isinstance(newState, list) and (newState not in oldStates) and (depth < maxAcceptableDepth):
+                    if isinstance(newState, list) and (depth < maxAcceptableDepth):
                         currentStates.append(newState)
                         currentInstructions.append(nextInstructions + operator)
                         currentDepths.append(depth + 1)
+
         else:
             return "Puzzle unsolved.", procededStates, visitedStates, maxDepth, (time.perf_counter() - start) * 1000 
