@@ -20,15 +20,16 @@ def dfs(puzzle, order):
             nextInstructions = currentInstructions.pop()
             depth = currentDepths.pop()
             maxDepth = max(depth, maxDepth)
-            if isinstance(nextState, list) and (nextState not in oldStates) and (depth <= maxAcceptableDepth):
-                oldStates.append(nextState)
-                procededStates += 1
-                if validate(nextState):
-                    return nextInstructions, procededStates, visitedStates, maxDepth, (time.perf_counter() - start) * 1000 
-                else:
-                    for operator in reversed(order):
-                        visitedStates += 1
-                        currentStates.append(move(nextState, operator))
+            oldStates.append(nextState)
+            procededStates += 1
+            if validate(nextState):
+                return nextInstructions, procededStates, visitedStates, maxDepth, (time.perf_counter() - start) * 1000 
+            else:
+                for operator in reversed(order):
+                    visitedStates += 1
+                    newState = move(nextState, operator)
+                    if isinstance(newState, list) and (newState not in oldStates) and (depth < maxAcceptableDepth):
+                        currentStates.append(newState)
                         currentInstructions.append(nextInstructions + operator)
                         currentDepths.append(depth + 1)
         else:
