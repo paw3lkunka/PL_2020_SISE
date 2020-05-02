@@ -4,3 +4,4 @@ wikamp
 jupyter_archives
 .ipynb_checkpoints
 Untitled*
+*.pyc
