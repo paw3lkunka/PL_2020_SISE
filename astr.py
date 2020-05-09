@@ -42,13 +42,13 @@ def astr(puzzle, heuristic):
                 bestIndex = i
         
         proceededStates += 1
-        if validate(currentStates[bestIndex]):
-            return currentInstructions[bestIndex], proceededStates, visitedStates, maxDepth, (time.perf_counter() - start) * 1000
 
         for operator in "LRUD":
             new = move(currentStates[bestIndex], operator)
             if isinstance(new[0], list) and (new not in oldStates):
                 visitedStates += 1
+                if validate(new):
+                    return currentInstructions[bestIndex] + operator, proceededStates, visitedStates, maxDepth, (time.perf_counter() - start) * 1000
                 currentStates.append(new)
                 currentInstructions.append(currentInstructions[bestIndex] + operator)
                 currentDistences.append(f(new))
